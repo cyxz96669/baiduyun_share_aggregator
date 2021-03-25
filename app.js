@@ -64,6 +64,7 @@ if (!BDUSS || !TARGET_DIR) {
                     "Cookie": real_share_id ? `BDCLND=${cookie_str}`: ''
                 },
             }
+            //get share file list
             let real_baidu_page =  await requestSync(options);
             let files_info = getFilesInfo(real_baidu_page.body);
             if (files_info.shareid && files_info.from && files_info.fsidlist.length > 0) {
@@ -73,6 +74,8 @@ if (!BDUSS || !TARGET_DIR) {
                 console.log('get files info failed with:', files_info);
                 continue;
             }
+
+            //save to my path
             let push_options = {
                 url: `https://pan.baidu.com/share/transfer?shareid=${files_info.shareid}&from=${files_info.from}&channel=&web=1&app_id=&bdstoken=null&logid=null&clienttype=0`,
                 method: 'post',

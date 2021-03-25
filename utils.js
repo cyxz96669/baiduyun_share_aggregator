@@ -43,16 +43,16 @@ function getFilesInfo (html) {
     if (html === '') {
         return result;
     }
-    let reg = /yunData.setData\((.*)\);/gim;
+    let reg = /locals.mset\((.*)\);/gim;
     let params = reg.exec(html);
     if (params.length > 1) {
         params = params[1];
         try {
             params = JSON.parse(params);
             result.shareid = params.shareid;
-            result.from = params.uk;
+            result.from = params.share_uk;
             if (params.file_list) {
-                params.file_list.list.map(item => {
+                params.file_list.map(item => {
                     result.fsidlist.push(item.fs_id);
                 })
             }
